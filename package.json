@@ -2,7 +2,9 @@
   "name": "rrnl-sentry-middleware",
   "version": "0.0.1",
   "description": "A middleware of React Relay Network Layer, which adds graphQL request info to sentry breadcrumb.",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "es/index.js",
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "lint": "eslint",
@@ -28,19 +30,25 @@
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.18",
+    "@types/relay-runtime": "^6.0.11",
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",
     "husky": "^3.1.0",
+    "install-peers": "^1.0.3",
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
     "prettier-eslint-cli": "^5.0.0",
+    "react-relay-network-modern": "^4.3.0",
     "rollup": "^1.27.13",
     "rollup-plugin-typescript2": "^0.25.3",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
+  },
+  "peerDependencies": {
+    "@sentry/core": ">4.x"
   },
   "husky": {
     "hooks": {
@@ -52,5 +60,8 @@
       "./node_modules/.bin/prettier-eslint --config .prettierrc --eslint-config-path .eslintrc.js --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "@sentry/types": "^5.10.0"
   }
 }
