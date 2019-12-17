@@ -4,7 +4,10 @@
   "description": "A middleware of React Relay Network Layer, which adds graphQL request info to sentry breadcrumb.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup --config rollup.config.js",
+    "lint": "eslint",
+    "jest": "jest",
+    "test": "yarn run lint && jest"
   },
   "repository": {
     "type": "git",
@@ -21,5 +24,33 @@
   "bugs": {
     "url": "https://github.com/xyy94813/RRNL-sentry-middleware/issues"
   },
-  "homepage": "https://github.com/xyy94813/RRNL-sentry-middleware#readme"
+  "homepage": "https://github.com/xyy94813/RRNL-sentry-middleware#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.18",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "prettier-eslint-cli": "^5.0.0",
+    "rollup": "^1.27.13",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,less,html,md,ts}": [
+      "./node_modules/.bin/prettier-eslint --config .prettierrc --eslint-config-path .eslintrc.js --write",
+      "git add"
+    ]
+  }
 }
