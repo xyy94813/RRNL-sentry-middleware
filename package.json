@@ -1,0 +1,25 @@
+{
+  "name": "rrnl-sentry-middleware",
+  "version": "0.0.1",
+  "description": "A middleware of React Relay Network Layer, which adds graphQL request info to sentry breadcrumb.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyy94813/RRNL-sentry-middleware.git"
+  },
+  "keywords": [
+    "Sentry",
+    "RRNL",
+    "Relay",
+    "GraphQL"
+  ],
+  "author": "xyy94813@sina.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/xyy94813/RRNL-sentry-middleware/issues"
+  },
+  "homepage": "https://github.com/xyy94813/RRNL-sentry-middleware#readme"
+}
