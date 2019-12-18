@@ -2,6 +2,8 @@
 
 A middleware of React Relay Network Layer, which adds graphQL request info to sentry breadcrumb.
 
+> Note: not support batch request now.
+
 ## Usage
 
 **Install**
