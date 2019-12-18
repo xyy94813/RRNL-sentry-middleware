@@ -27,6 +27,9 @@
     "url": "https://github.com/xyy94813/RRNL-sentry-middleware/issues"
   },
   "homepage": "https://github.com/xyy94813/RRNL-sentry-middleware#readme",
+  "dependencies": {
+    "@sentry/types": "^5.10.0"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.18",
@@ -61,8 +64,5 @@
       "./node_modules/.bin/prettier-eslint --config .prettierrc --eslint-config-path .eslintrc.js --write",
       "git add"
     ]
-  },
-  "dependencies": {
-    "@sentry/types": "^5.10.0"
   }
 }
