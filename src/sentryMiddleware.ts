@@ -4,7 +4,7 @@ import {
   //   RelayNetworkLayerResponse,
   ConcreteBatch,
   Variables,
-} from 'react-relay-network-modern';
+} from 'react-relay-network-modern/es';
 
 export interface RRNLOperation extends ConcreteBatch {
   operationKind?: string;
