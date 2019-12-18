@@ -48,7 +48,8 @@
     "typescript": "^3.7.3"
   },
   "peerDependencies": {
-    "@sentry/core": ">4.x"
+    "@sentry/core": ">4.x",
+    "react-relay-network-modern": "^4.x"
   },
   "husky": {
     "hooks": {
