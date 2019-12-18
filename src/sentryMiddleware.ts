@@ -1,13 +1,20 @@
 import { Breadcrumb, Severity, Hub } from '@sentry/types';
 import {
   RelayNetworkLayerRequest,
-  //   RelayNetworkLayerResponse,
+  RelayNetworkLayerResponse,
   ConcreteBatch,
   Variables,
+  Middleware,
+  MiddlewareNextFn,
+  RelayRequestAny,
 } from 'react-relay-network-modern/es';
 
 export interface RRNLOperation extends ConcreteBatch {
   operationKind?: string;
+}
+
+export interface RelayResponse extends RelayNetworkLayerResponse {
+  status: number;
 }
 
 export interface SentryMiddlewareOption {
@@ -22,13 +29,19 @@ export interface SentryBreadcrumbData {
   status_code?: number;
 }
 
-function sentryMiddleware(option: SentryMiddlewareOption) {
+function sentryMiddleware(option: SentryMiddlewareOption): Middleware {
   const { hub } = option;
   if (!hub) {
     throw Error('Sentry hub is required');
   }
-  return (next: Function) => async (req: RelayNetworkLayerRequest) => {
-    const { operation, variables }: { operation: RRNLOperation; variables: Variables } = req;
+  return (next: MiddlewareNextFn) => async (req: RelayRequestAny): Promise<RelayResponse> => {
+    const {
+      operation,
+      variables,
+    }: {
+      operation: RRNLOperation;
+      variables: Variables;
+    } = req as RelayNetworkLayerRequest;
     const { name, text, operationKind } = operation;
 
     const breadcrumb: Breadcrumb = {
@@ -48,16 +61,16 @@ function sentryMiddleware(option: SentryMiddlewareOption) {
       text,
       variables,
     };
-    let response = { status: -1 };
     try {
-      response = await next(req);
+      const response = (await next(req)) as RelayResponse;
+      data.status_code = response.status;
       return response;
     } catch (err) {
       breadcrumb.level = Severity.Warning;
-      response = err.res;
+      const response = err.res as RelayResponse;
+      data.status_code = response.status;
       throw err;
     } finally {
-      data.status_code = response.status;
       breadcrumb.data = data;
       hub.addBreadcrumb(breadcrumb);
     }
