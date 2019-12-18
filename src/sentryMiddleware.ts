@@ -1,3 +1,4 @@
+/* eslint no-unused-vars:"warn" */
 import { Breadcrumb, Severity, Hub } from '@sentry/types';
 import {
   RelayNetworkLayerRequest,
@@ -63,11 +64,13 @@ function sentryMiddleware(option: SentryMiddlewareOption): Middleware {
     };
     try {
       const response = (await next(req)) as RelayResponse;
+      /* eslint camelcase:"off" */
       data.status_code = response.status;
       return response;
     } catch (err) {
       breadcrumb.level = Severity.Warning;
       const response = err.res as RelayResponse;
+      /* eslint camelcase:"off" */
       data.status_code = response.status;
       throw err;
     } finally {
