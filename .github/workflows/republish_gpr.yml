@@ -3,7 +3,7 @@ name: Re-publish to gpr
 on:
   push:
     branches:
-      - re-publish
+      - re-publish-gpr
 
 jobs:
   build:
@@ -45,6 +45,8 @@ jobs:
           path: es
       - run: npm ci
       - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+      # - run: npm config set registry https://npm.pkg.github.com/
+      - run: npm config get registry
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
