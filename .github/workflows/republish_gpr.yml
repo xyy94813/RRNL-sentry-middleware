@@ -45,7 +45,7 @@ jobs:
           path: es
       - run: npm ci
       - run: echo registry=https://npm.pkg.github.com/xyy94813 >> .npmrc
-      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+      - run: echo "//npm.pkg.github.com/xyy94813/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       - run: npm config get registry
       - run: npm publish
         env:
