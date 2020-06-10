@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/xyy94813/RRNL-sentry-middleware#readme",
   "dependencies": {
-    "@sentry/types": "^5.10.0"
+    "@sentry/types": "^5.17.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
@@ -48,7 +48,7 @@
     "rollup": "^1.27.13",
     "rollup-plugin-typescript2": "^0.25.3",
     "ts-jest": "^26.1.0",
-    "typescript": "^3.7.3"
+    "typescript": "^3.9.5"
   },
   "peerDependencies": {
     "@sentry/core": ">4.x",
