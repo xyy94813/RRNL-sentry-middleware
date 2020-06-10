@@ -3,7 +3,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  // plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint'],
   extends: ['airbnb-base'],
   rules: {
     'arrow-parens': ['warn', 'as-needed'],
@@ -12,4 +12,12 @@ module.exports = {
     'implicit-arrow-linebreak': ['off'],
     'function-paren-newline': ['off'],
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
+      },
+    },
+  ],
 };
