@@ -10,14 +10,6 @@ import {
   RelayRequestAny,
 } from 'react-relay-network-modern/es';
 
-export interface RRNLOperation extends ConcreteBatch {
-  operationKind?: string;
-}
-
-export interface RelayResponse extends RelayNetworkLayerResponse {
-  status: number;
-}
-
 export interface SentryMiddlewareOption {
   hub: Hub;
 }
@@ -35,12 +27,14 @@ function sentryMiddleware(option: SentryMiddlewareOption): Middleware {
   if (!hub) {
     throw Error('Sentry hub is required');
   }
-  return (next: MiddlewareNextFn) => async (req: RelayRequestAny): Promise<RelayResponse> => {
+  return (next: MiddlewareNextFn) => async (
+    req: RelayRequestAny,
+  ): Promise<RelayNetworkLayerResponse> => {
     const {
       operation,
       variables,
     }: {
-      operation: RRNLOperation;
+      operation: ConcreteBatch;
       variables: Variables;
     } = req as RelayNetworkLayerRequest;
     const { name, text, operationKind } = operation;
@@ -63,13 +57,13 @@ function sentryMiddleware(option: SentryMiddlewareOption): Middleware {
       variables,
     };
     try {
-      const response = (await next(req)) as RelayResponse;
+      const response = (await next(req)) as RelayNetworkLayerResponse;
       /* eslint camelcase:"off" */
       data.status_code = response.status;
       return response;
     } catch (err) {
       breadcrumb.level = Severity.Warning;
-      const response = err.res as RelayResponse;
+      const response = err.res as RelayNetworkLayerResponse;
       /* eslint camelcase:"off" */
       data.status_code = response.status;
       throw err;
