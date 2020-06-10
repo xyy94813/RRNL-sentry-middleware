@@ -3,7 +3,10 @@ const path = require('path');
 
 const pkg = require('./package.json');
 
-const deps = [...Object.keys(pkg.peerDependencies || {}), ...Object.keys(pkg.dependencies || {})];
+const deps = [
+  ...Object.keys(pkg.peerDependencies || {}),
+  ...Object.keys(pkg.dependencies || {}),
+];
 
 const external = id => deps.includes(id) || /@babel\/runtime\//.test(id);
 
