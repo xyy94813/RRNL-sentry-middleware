@@ -23,7 +23,7 @@
     "GraphQL"
   ],
   "author": "xyy94813@sina.com",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/xyy94813/RRNL-sentry-middleware/issues"
   },
