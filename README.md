@@ -34,7 +34,7 @@ import { getCurrentHub } from '@sentry/core';
 const network = new RelayNetworkLayer([
   // ... your RelayNetworkLayer middleware
   sentryMiddleware({
-    hub: getCurrentHub(),
+    hub: getCurrentHub,
   }),
 ]);
 ```

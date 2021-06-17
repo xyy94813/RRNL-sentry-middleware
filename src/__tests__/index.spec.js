@@ -5,6 +5,7 @@ class Hub {
   constructor() {
     this.breadcrumbs = [];
   }
+
   addBreadcrumb = breadcrumb => {
     this.breadcrumbs.push(breadcrumb);
   };
@@ -13,12 +14,11 @@ class Hub {
 function compose(...funcs) {
   if (funcs.length === 0) {
     return arg => arg;
-  } else {
-    const last = funcs[funcs.length - 1];
-    const rest = funcs.slice(0, -1);
-    // $FlowFixMe - Suppress error about promise not being callable
-    return (...args) => rest.reduceRight((composed, f) => f(composed), last(...args));
   }
+  const last = funcs[funcs.length - 1];
+  const rest = funcs.slice(0, -1);
+  // $FlowFixMe - Suppress error about promise not being callable
+  return (...args) => rest.reduceRight((composed, f) => f(composed), last(...args));
 }
 
 describe('Sentry Middleware', () => {
@@ -92,7 +92,30 @@ describe('Sentry Middleware', () => {
     }
   });
 
-  it('no pass hub', () => {
+  it('`hub` is function', async () => {
+    const mockRes = {
+      status: 200,
+    };
+    const fetchSuccess = req => Promise.resolve(mockRes);
+
+    await compose(
+      sentryMiddleware({
+        hub: () => hub,
+      }),
+    )(fetchSuccess)(mockReq);
+
+    const breadcrumb = hub.breadcrumbs.pop();
+    expect(breadcrumb.category).toBe('graphql');
+    expect(breadcrumb.type).toBe('http');
+    expect(breadcrumb.level).toBe('info');
+    expect(breadcrumb.data.url).toBe(mockReq.operation.name);
+    expect(breadcrumb.data.method).toBe(mockReq.operation.operationKind);
+    expect(breadcrumb.data.text).toBe(mockReq.operation.text);
+    expect(breadcrumb.data.variables).toEqual(mockReq.variables);
+    expect(breadcrumb.data.status_code).toBe(mockRes.status);
+  });
+
+  it('no pass `hub`', () => {
     const excutor = () => {
       sentryMiddleware({});
     };

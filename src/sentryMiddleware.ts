@@ -11,7 +11,7 @@ import {
 } from 'react-relay-network-modern/es';
 
 export interface SentryMiddlewareOption {
-  hub: Hub;
+  hub: Hub | (() => Hub);
 }
 
 export interface SentryBreadcrumbData {
@@ -27,6 +27,9 @@ function sentryMiddleware(option: SentryMiddlewareOption): Middleware {
   if (!hub) {
     throw Error('Sentry hub is required');
   }
+
+  const getHub = typeof hub === 'function' ? hub : () => hub;
+
   return (next: MiddlewareNextFn) => async (
     req: RelayRequestAny,
   ): Promise<RelayNetworkLayerResponse> => {
@@ -69,7 +72,7 @@ function sentryMiddleware(option: SentryMiddlewareOption): Middleware {
       throw err;
     } finally {
       breadcrumb.data = data;
-      hub.addBreadcrumb(breadcrumb);
+      getHub().addBreadcrumb(breadcrumb);
     }
   };
 }
