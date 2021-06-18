@@ -42,7 +42,7 @@
     "husky": "^6.0.0",
     "install-peers": "^1.0.3",
     "jest": "^27.0.4",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "react-relay-network-modern": "^4.7.2",
     "rollup": "^1.27.13",
@@ -53,11 +53,5 @@
   "peerDependencies": {
     "@sentry/core": ">4.x",
     "react-relay-network-modern": "^4.x"
-  },
-  "lint-staged": {
-    "*.{js,json,css,less,html,md,ts}": [
-      "./node_modules/.bin/prettier-eslint --config .prettierrc --eslint-config-path .eslintrc.js --write",
-      "git add"
-    ]
   }
 }
