@@ -18,7 +18,8 @@ function compose(...funcs) {
   const last = funcs[funcs.length - 1];
   const rest = funcs.slice(0, -1);
   // $FlowFixMe - Suppress error about promise not being callable
-  return (...args) => rest.reduceRight((composed, f) => f(composed), last(...args));
+  return (...args) =>
+    rest.reduceRight((composed, f) => f(composed), last(...args));
 }
 
 describe('Sentry Middleware', () => {
@@ -48,7 +49,7 @@ describe('Sentry Middleware', () => {
     const mockRes = {
       status: 200,
     };
-    const fetchSuccess = req => Promise.resolve(mockRes);
+    const fetchSuccess = () => Promise.resolve(mockRes);
 
     await compose(
       sentryMiddleware({
@@ -85,6 +86,7 @@ describe('Sentry Middleware', () => {
         }),
       )(fetchFail)(mockReq);
     } catch (error) {
+      expect(error.message).toBe('Mock Error');
     } finally {
       const breadcrumb = hub.breadcrumbs.pop();
       expect(breadcrumb.level).toBe('warning');
@@ -96,7 +98,7 @@ describe('Sentry Middleware', () => {
     const mockRes = {
       status: 200,
     };
-    const fetchSuccess = req => Promise.resolve(mockRes);
+    const fetchSuccess = () => Promise.resolve(mockRes);
 
     await compose(
       sentryMiddleware({

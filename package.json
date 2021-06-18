@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rm -rf es && rm -rf lib",
     "build": "rollup --config rollup.config.js",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint .",
     "jest": "jest",
     "test": "yarn run lint && jest"
   },
@@ -39,11 +39,12 @@
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^24.3.6",
     "husky": "^6.0.0",
     "install-peers": "^1.0.3",
     "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
-    "prettier-eslint-cli": "^5.0.0",
+    "prettier": "^2.3.1",
     "react-relay-network-modern": "^4.7.2",
     "rollup": "^1.27.13",
     "rollup-plugin-typescript2": "^0.27.1",
