@@ -1,5 +1,10 @@
 # RRNL-sentry-middleware
 
+[![Node CI](https://github.com/xyy94813/RRNL-sentry-middleware/actions/workflows/nodejs.yml/badge.svg)](https://github.com/xyy94813/RRNL-sentry-middleware/actions/workflows/nodejs.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/xyy94813/RRNL-sentry-middleware/master.svg?style=flat-square)](https://codecov.io/gh/xyy94813/RRNL-sentry-middleware/branch/master)
+[![npm package](https://img.shields.io/npm/v/rrnl-sentry-middleware.svg?style=flat-square)](https://www.npmjs.org/package/rrnl-sentry-middleware)
+[![npm downloads](https://img.shields.io/npm/dm/rrnl-sentry-middleware.svg?style=flat-square)](http://npmjs.com/rrnl-sentry-middleware)
+
 A middleware of React Relay Network Layer, which adds graphQL request info to sentry breadcrumb.
 
 > Note: not support batch request now.
